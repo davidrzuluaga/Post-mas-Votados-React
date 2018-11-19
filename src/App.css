@@ -28,3 +28,8 @@ div.general-grid {
   display: flex;
   align-items: center;
   justify-content: center }
+
+.arrow {color: black }
+.arrow:hover {
+  cursor: pointer;
+  color: orangered }
