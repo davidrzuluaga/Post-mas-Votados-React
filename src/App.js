@@ -7,20 +7,41 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: posts
+      posts: posts.sort(this.compare),
+      ascBut: "default",
+      desBut: "primary"
     }
+  }
+  compare = (a,b) => {
+    if (a.votes < b.votes)
+      return -1;
+    if (a.votes > b.votes)
+      return 1;
+    return 0;
+  }
+  orderAscendent = () => {
+    this.setState({
+      desBut: "default",     
+      ascBut: "primary",      
+      posts: this.state.posts.sort(this.compare).reverse()
+    })
+  }
+  orderDescendent = () => {
+    this.setState({
+      desBut: "primary",     
+      ascBut: "default",  
+      posts: this.state.posts.sort(this.compare)
+    })
   }
   voteArrows = (e) => {
     const index = this.state.posts.map(function(e) { return e.id; }).indexOf(Math.floor(e.target.id))
     var postVotes = this.state.posts[index].votes
     e.target.classList.contains("glyphicon-triangle-top") ? postVotes += 1 : postVotes -= 1
+    var newPosts = this.state.posts.map((post, i) => i === index ? {id: post.id, title: post.title, description: post.description, url: post.url, votes: postVotes, writer_avatar_url: post.writer_avatar_url, post_image_url: post.post_image_url,} : post)
     this.setState({
-      tasks: this.state.posts.map((post, i) =>
-        i === index ? {votes: post.votes = postVotes } : post
-      )
+      posts: this.state.desBut === "primary" ? newPosts.sort(this.compare) : newPosts.sort(this.compare).reverse()
     })
   }
-  
   render() {
     return (
       <Grid>
@@ -29,8 +50,8 @@ class App extends Component {
             <h1>Blog posts populares</h1>
           <div className="general-grid">
             <p>Orden: 
-              <Button>Ascendente</Button>
-              <Button>Descendente</Button>
+              <Button bsStyle={this.state.ascBut} onClick={this.orderAscendent}>Ascendente</Button>
+              <Button bsStyle={this.state.desBut} onClick={this.orderDescendent}>Descendente</Button>
             </p>
           </div>
            {this.state.posts.map((post, index) =>  
