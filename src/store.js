@@ -25,4 +25,4 @@ const logger = store => next => action => {
     return result
   }
 
-export default createStore(reducer, { posts: [] }, applyMiddleware(logger));
+export default createStore(reducer, applyMiddleware(logger));

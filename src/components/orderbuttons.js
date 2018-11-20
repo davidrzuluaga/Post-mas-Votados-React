@@ -4,8 +4,8 @@ import posts from './posts'
 import store from "../store";
 
 class Buttons extends Component {
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
       this.state = {
         posts: posts.sort(this.compare),
         ascBut: "default",
