@@ -50,13 +50,13 @@ class Votes extends Component {
             <div>
             {this.state.posts.map((post, index) =>  
                 <Row className="posts-grid" key={post.id}>
-                  <Col md={4}><a href={post.url}><img alt={ post.id } className="image" src={ post.post_image_url } /></a></Col>
-                  <Col className="votes" md={1}>
+                  <Col xs={4}><a href={post.url}><img alt={ post.id } className="image" src={ post.post_image_url } /></a></Col>
+                  <Col className="votes" xs={1}>
                     <span onClick={this.voteArrows} id={post.id} className="glyphicon glyphicon-triangle-top arrow" aria-hidden="true" />
                     {post.votes}
                     <span onClick={this.voteArrows} id={post.id} className="glyphicon glyphicon-triangle-bottom arrow" aria-hidden="true" />
                   </Col>
-                  <Col md={7}><a href={post.url}><p>{ post.title }</p></a><p>{ post.description }</p><p className="writtenby">Escrito por: <img alt={ post.id } className="authoravatar" src={ post.writer_avatar_url } /></p></Col>
+                  <Col xs={7}><a href={post.url}><p>{ post.title }</p></a><p>{ post.description }</p><p className="writtenby">Escrito por: <img alt={ post.id } className="authoravatar" src={ post.writer_avatar_url } /></p></Col>
                 </Row>
                 )}
             </div>
